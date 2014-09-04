@@ -14,3 +14,7 @@ This module is mainly for debugging. There's no need as a normal user to use thi
 Security
 ========
 As this module should *never* be used on a live board no security checks have been added!
+
+Suggestions? Bugs?
+==================
+If you have any ideas to improve this module: feel free to create an issue, same for bugs.
