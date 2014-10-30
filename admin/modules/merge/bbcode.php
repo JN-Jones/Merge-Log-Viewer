@@ -51,7 +51,7 @@ if($mybb->request_method == "post")
 
 	// And finally: Do our parser magic
 	if($mybb->input['board'] == "phpbb3")
-		$text = $bbcode_parser->convert($mybb->input['text'], $mybb->input['uid']);
+		$text = $bbcode_parser->convert($mybb->input['text'], $mybb->input['bbid']);
 	else
 		$text = $bbcode_parser->convert($mybb->input['text']);
 
@@ -117,7 +117,7 @@ $form_container->output_row("Board", "The parser of which board should be used?"
 $text = $form->generate_text_area("text", $mybb->input['text']);
 $form_container->output_row("Text", "Which text should be parsed?\nYou should paste the value as saved in the database (which is not alawys the same as showed in the editor)", $text);
 
-$uid = $form->generate_text_box("uid", $mybb->input['uid']);
+$uid = $form->generate_text_box("bbid", $mybb->input['bbid']);
 $form_container->output_row("UID", "(Only phpBB) If your bbcode contains an id (eg [b:2020]bold[/b]) the id should be entered here (eg 2020)", $uid, '', array(), array("id"=>"uid"));
 
 $form_container->end();
