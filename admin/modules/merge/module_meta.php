@@ -11,9 +11,10 @@ function merge_meta()
 
 	$sub_menu = array();
 	$sub_menu['10'] = array("id" => "logs", "title" => "View debug logs", "link" => "index.php?module=merge-logs");
-	$sub_menu['20'] = array("id" => "truncate", "title" => "Truncate table", "link" => "index.php?module=merge-truncate");
-	$sub_menu['30'] = array("id" => "delete", "title" => "Delete table", "link" => "index.php?module=merge-delete");
-	$sub_menu['40'] = array("id" => "run", "title" => "Run merge system", "link" => $mybb->settings['bburl']."/merge/index.php");
+	$sub_menu['20'] = array("id" => "bbcode", "title" => "Test BBCode Parser", "link" => "index.php?module=merge-bbcode");
+	$sub_menu['30'] = array("id" => "truncate", "title" => "Truncate table", "link" => "index.php?module=merge-truncate");
+	$sub_menu['40'] = array("id" => "delete", "title" => "Delete table", "link" => "index.php?module=merge-delete");
+	$sub_menu['50'] = array("id" => "run", "title" => "Run merge system", "link" => $mybb->settings['bburl']."/merge/index.php");
 
 	$sub_menu = $plugins->run_hooks("admin_merge_menu", $sub_menu);
 
@@ -29,6 +30,7 @@ function merge_action_handler($action)
 
 	$actions = array(
 		'logs' => array('active' => 'logs', 'file' => 'debuglogs.php'),
+		'bbcode' => array('active' => 'bbcode', 'file' => 'bbcode.php'),
 		'truncate' => array('active' => 'truncate', 'file' => 'truncate.php'),
 		'delete' => array('active' => 'delete', 'file' => 'delete.php')
 	);
