@@ -21,16 +21,36 @@ $page->output_header("Merge Debuglogs");
 
 if(!$mybb->input['action'])
 {
+	if($db->table_exists('debuglogs')) {
+		// Do we have an error?
+		$query = $db->simple_select('debuglogs', 'dlid', 'type='.MERGE_ERROR);
+		if($db->num_rows($query) > 0) {
+			$page->output_alert("There are {$db->num_rows($query)} errors in the logs. <a href='index.php?module=merge&filter_type[]=".MERGE_ERROR."'>View all</a>");
+		}
+
+		// Do we have a warning?
+		$query = $db->simple_select('debuglogs', 'dlid', 'type='.MERGE_WARNING);
+		if($db->num_rows($query) > 0) {
+			$page->output_error("There are {$db->num_rows($query)} warning in the logs. <a href='index.php?module=merge&filter_type[]=".MERGE_WARNING."'>View all</a>");
+		}
+	}
+
 	if(!isset($mybb->input['page']))
 		$mybb->input['page'] = 1;
     
-	if($mybb->request_method != "post")
-	{
+	if(!isset($mybb->input['sort'])) {
 		$mybb->input['sort'] = "timestamp";
+	}
+	if(!isset($mybb->input['order'])) {
 		$mybb->input['order'] = "desc";
+	}
+	if(!isset($mybb->input['filter_type'])) {
 		$mybb->input['filter_type'] = range(1, 8);
+	}
+	if(!isset($mybb->input['filter_message'])) {
 		$mybb->input['filer_message'] = "";
 	}
+
 	$desc_bool = $asc_bool = false;
 	if($mybb->input['order'] == "desc")
 	    $desc_bool = true;
